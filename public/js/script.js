@@ -58,6 +58,24 @@ function insertBasicTable(basic_data, insert_id) {
   }
 }
 
+function insertStatsDropdown(basic_data, insert_id) {
+  
+
+  dropdown_id = '#' + insert_id;
+  var array_length = Object.keys(basic_data).length;
+  var array_obj_names = Object.keys(basic_data);
+
+  $(dropdown_id).empty();
+
+  for (var i = 0; i < array_length; i++) {
+    var tag       = array_obj_names[i];
+    var data      = basic_data[tag];
+
+    $(dropdown_id).append('<li role="presentation">' +
+      '<a role="menuitem" tabindex="-1">' + tag + ' : ' + data);
+  }
+}
+
 function loadStart(event) {
   console.log('file loading');
 }
@@ -73,4 +91,5 @@ function loadEnd(event) {
   linePlot.render(fastQCFile.modules.qual.quintiles);
   boxPlot.render(fastQCFile.modules.qual.quintiles);
   insertBasicTable(fastQCFile.modules.basic, 'basic-stats-table');
+  insertStatsDropdown(fastQCFile.modules.basic, 'stats-dropdown')
 }
